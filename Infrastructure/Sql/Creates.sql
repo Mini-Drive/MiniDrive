@@ -1,0 +1,48 @@
+-- Active: 1719360795516@@minidrive.database.windows.net@1433@Mini Diver
+
+
+CREATE TABLE Users(
+    Id INT PRIMARY KEY IDENTITY(1,1),
+    FirstName VARCHAR(255) NOT NULL,
+    LastName VARCHAR(255) NOT NULL,
+    Age VARCHAR(3) NOT NULL,
+    UserName VARCHAR(255) NOT NULL,
+    Password VARCHAR(255) NOT NULL,
+    Email VARCHAR(255) NOT NULL,
+    CreateAt DATE NOT NULL DEFAULT GETDATE(),
+    Status NVARCHAR(255) NOT NULL DEFAULT 'ACTIVE',
+    CONSTRAINT UCEmail UNIQUE(Email),
+    CONSTRAINT UCUserName UNIQUE(UserName)
+);
+
+ALTER TABLE Users
+ADD CONSTRAINT chk_status CHECK (Status IN ('ACTIVE', 'INACTIVE'));
+
+CREATE TABLE Folders(
+    Id INT PRIMARY KEY IDENTITY(1,1),
+    FolderName VARCHAR(255) NOT NULL,
+    ParentFolderID INT NULL,
+    CreateAt DATE NOT NULL,
+    UserId INT NULL,
+    Status NVARCHAR(255) NOT NULL DEFAULT 'ACTIVE',
+    CONSTRAINT chk_statusFolders CHECK (Status IN ('ACTIVE', 'INACTIVE', "TRASH")),
+    CONSTRAINT FK_UserId FOREIGN KEY (UserId) REFERENCES Users(Id)
+);
+
+ALTER TABLE Folders
+ADD CONSTRAINT FK_FolderParentID FOREIGN KEY (ParentFolderID) REFERENCES Folders(Id);
+
+
+CREATE TABLE Files(
+    Id INT PRIMARY KEY IDENTITY(1,1),
+    FileName VARCHAR(255) NOT NULL,
+    FileExtension VARCHAR(255) NOT NULL,
+    FolderId INT NULL,
+    CreateAt DATE NOT NULL,
+    UserId INT NULL,
+    Status NVARCHAR(255) NOT NULL DEFAULT 'ACTIVE',
+    CONSTRAINT chk_statusFiles CHECK (Status IN ('ACTIVE', 'INACTIVE')),
+    CONSTRAINT FK_UserIdFiles FOREIGN KEY (UserId) REFERENCES Users(Id),
+    CONSTRAINT FK_FolderIdFiles FOREIGN KEY (FolderId) REFERENCES Folders(Id),
+    CONSTRAINT UC_FileName UNIQUE(FileName, FileExtension)
+);
