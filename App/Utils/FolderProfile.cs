@@ -9,6 +9,7 @@ namespace MiniDrive.App.Utils
         public FolderProfile()
         {
             CreateMap<FolderDto, Folder>().ForAllMembers(opts => opts.Condition((src, dest, srcMember) => srcMember != null));
+            CreateMap<Folder, FolderDto>().ForAllMembers(opts => opts.Condition((src, dest, srcMember) => srcMember != null));
         }
         
     }
