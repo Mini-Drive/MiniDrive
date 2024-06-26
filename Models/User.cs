@@ -31,5 +31,11 @@ namespace MiniDrive.Models
         [Required]
         public string Status {get;set;}
 
+        [JsonIgnore]
+        public List<Folder>? Folders { get; set; }
+
+        [JsonIgnore]
+        public List<File>? Files { get; set; }
+
     }
 }

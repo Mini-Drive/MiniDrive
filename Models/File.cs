@@ -9,7 +9,7 @@ namespace MiniDrive.Models
         public Folder? Folder { get; set; }
         public DateOnly? CreateAt { get; set; }
         public int? UserId { get; set; }
-        //public User? User { get; set; }
+        public User? User { get; set; }
         public string? Status { get; set; }
     }
 }

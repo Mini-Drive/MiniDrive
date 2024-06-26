@@ -1,6 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using MiniDrive.Infrastructure.Contexts;
-using MiniDrive.Utils;
+using MiniDrive.App.Utils;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.

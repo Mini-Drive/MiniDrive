@@ -2,7 +2,7 @@ using AutoMapper;
 using MiniDrive.Dtos;
 using MiniDrive.Models;
 
-namespace MiniDrive.Utils
+namespace MiniDrive.App.Utils
 {
     public class UserProfile : Profile
     {
