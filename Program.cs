@@ -1,5 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using MiniDrive.Infrastructure.Contexts;
+using MiniDrive.Utils;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
@@ -10,6 +11,7 @@ builder.Services.AddSwaggerGen();
 //Configure context to conect at the database in azure whit sqlServer
 builder.Services.AddDbContext<MiniDriveContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
+builder.Services.AddAutoMapper(typeof(FileProfile),typeof(FolderProfile),typeof(UserProfile));
 
 
 var app = builder.Build();
