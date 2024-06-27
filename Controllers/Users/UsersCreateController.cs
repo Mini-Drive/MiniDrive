@@ -1,30 +1,25 @@
 using Microsoft.AspNetCore.Mvc;
-using MiniDrive.App.Interfaces;
 using MiniDrive.App.Services;
-using MiniDrive.Models;
+using MiniDrive.Dtos;
 
-namespace MiniDrive.Controllers
+namespace MiniDrive.Controllers.Users
 {
     [ApiController]
     public class UsersCreateController : ControllerBase
     {
-        private readonly IUsers _users;
+        private readonly UserServices _services;
 
-        public UsersCreateController(IUsers users)
+        public UsersCreateController(UserServices services)
         {
-            _users = users;
+            _services = services;
         }
 
         [HttpPost]
-
-        public async Task<IActionResult> CreateUser(User user)
+        [Route("api/Users")]
+        public IActionResult CreateUser([FromBody] UserDto userDto)
         {
-     
-            
-                _users.CreateUser(user);
-                return Ok(user);
-
-
+            return Ok(_services.CreateUser(userDto));
         }
+
     }
 }

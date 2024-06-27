@@ -19,6 +19,19 @@ namespace MiniDrive.App.Implementations
             _mapper = mapper;
         }
 
+        //Function to get all users
+        public List<User> GetAllUsers()
+        {
+            return _context.Users.ToList();
+        }
+
+        //Function to get a user by id
+        
+        public User GetUserById(int id)
+        {
+            return _context.Users.Find(id);
+        }
+
         //Function to create a new user
         public User CreateUser(User user)
         {
@@ -36,13 +49,11 @@ namespace MiniDrive.App.Implementations
         }
 
         //Function to update user
-        public IActionResult UpdateUser(UserDto userDto)
+        public User UpdateUser(User user)
         {
-           var user = _context.Users.Find(userDto.Id);
-         
-            _mapper.Map(userDto, user);
+            _context.Users.Update(user);
             _context.SaveChanges();
-            return new OkObjectResult(user);
+            return user;
         }
     }
 }

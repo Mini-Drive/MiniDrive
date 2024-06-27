@@ -13,7 +13,14 @@ namespace MiniDrive.App.Interfaces
         User DeleteUser(User user);
 
         //function to update a user
-       IActionResult UpdateUser(UserDto userDto);
+        User UpdateUser(User user);
+
+        //function to get a user by id
+        User GetUserById(int id);
+
+        //function to get all users
+
+        List<User> GetAllUsers();
         
     }
 }
