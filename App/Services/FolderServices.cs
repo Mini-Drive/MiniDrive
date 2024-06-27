@@ -23,7 +23,7 @@ namespace MiniDrive.App.Services
         }
 
         //Function to Create a new folder
-        public Folder CreateFolder(FolderDto folderDto, int Id)
+        public Folder CreateFolder(FolderDto folderDto)
         { 
             var folder = new Folder();
             
@@ -32,10 +32,10 @@ namespace MiniDrive.App.Services
 
         //Function to Delete a folder (Update Status)
 
-        public Folder DeleteFolder(FolderDto folderDto)
+        public Folder DeleteFolder(FolderDto folderDto, int id)
         {
             folderDto.Status = "INACTIVE";
-            var folder = new Folder();
+            var folder = GetFolderById(id);
             return _folderRepository.DeleteFolder(_mapper.Map(folderDto, folder));
         }
 
@@ -70,9 +70,9 @@ namespace MiniDrive.App.Services
         }
 
         //Function to update a folder in the Folders table
-        public Folder UpdateFolder(FolderDto folderDto)
+        public Folder UpdateFolder(FolderDto folderDto, int id)
         {
-            var folder = new Folder();
+            var folder = GetFolderById(id);
             return _folderRepository.UpdateFolder(_mapper.Map(folderDto, folder));
         }
     }
