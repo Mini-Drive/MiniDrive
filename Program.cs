@@ -3,6 +3,12 @@ using MiniDrive.Infrastructure.Contexts;
 using MiniDrive.App.Utils;
 using MiniDrive.App.Implementations;
 using MiniDrive.App.Interfaces;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.IdentityModel.Tokens;
+using System.Text;
+
+
+
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -17,8 +23,29 @@ builder.Services.AddDbContext<MiniDriveContext>(options => options.UseSqlServer(
 //Register AutoMapper and their perfiles
 builder.Services.AddAutoMapper(typeof(FileProfile),typeof(FolderProfile),typeof(UserProfile));
 
-// Scopes de los servicios
+// Scopes of the services
 builder.Services.AddScoped<IUsers, UserRepository>();
+
+// Builder for JWT with the token
+builder.Services.AddAuthentication(opt =>
+{
+    opt.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+    opt.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+})
+    .AddJwtBearer(configure =>
+{
+    configure.TokenValidationParameters = new TokenValidationParameters
+    {
+        ValidateIssuer = true,
+        ValidateAudience = true,
+        ValidateLifetime = true,
+        ValidateIssuerSigningKey = true,
+        ValidIssuer = @Environment.GetEnvironmentVariable("JWTURL"),
+        ValidAudience = @Environment.GetEnvironmentVariable("JWTURL"),
+        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("3C7A6C4E2754B9A31F225E201C02D82E"))
+    };
+});
+
 
 var app = builder.Build();
 
@@ -28,6 +55,13 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+
+//permissions for disconnection
+app.UseAuthorization();
+app.UseAuthentication();
+
+//Middlewares
+app.MapControllers();
 
 app.UseHttpsRedirection();
 

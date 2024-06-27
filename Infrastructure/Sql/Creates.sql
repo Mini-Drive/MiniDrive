@@ -1,4 +1,4 @@
--- Active: 1719360795516@@minidrive.database.windows.net@1433@Mini Diver
+-- Active: 1719279770820@@minidrive.database.windows.net@1433@Mini Diver
 
 
 CREATE TABLE Users(
@@ -40,6 +40,7 @@ CREATE TABLE Files(
     FolderId INT NULL,
     CreateAt DATE NOT NULL,
     UserId INT NULL,
+    Content VARBINARY(MAX) NOT NULL,
     Status NVARCHAR(255) NOT NULL DEFAULT 'ACTIVE',
     CONSTRAINT chk_statusFiles CHECK (Status IN ('ACTIVE', 'INACTIVE')),
     CONSTRAINT FK_UserIdFiles FOREIGN KEY (UserId) REFERENCES Users(Id),

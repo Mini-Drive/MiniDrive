@@ -39,10 +39,7 @@ namespace MiniDrive.App.Implementations
         public IActionResult UpdateUser(UserDto userDto)
         {
            var user = _context.Users.Find(userDto.Id);
-            if (user == null)
-            {
-                return new NotFoundResult();
-            }
+         
             _mapper.Map(userDto, user);
             _context.SaveChanges();
             return new OkObjectResult(user);
