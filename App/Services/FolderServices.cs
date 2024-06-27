@@ -4,12 +4,18 @@ using MiniDrive.Dtos;
 using AutoMapper;
 
 namespace MiniDrive.App.Services
-{
+{   
+    //In this class we have the logic of proyect, restrictions and permissions
     public class FolderServices
     {
+        //Instance of our implementation that do anything about responsabilities of the database
         private readonly FolderRepository _folderRepository;
+
+        //Instance of our mapper
         private readonly IMapper _mapper;
 
+
+        //Constructor of the class that implements the mapper, and initialize our repository
         public FolderServices(FolderRepository folderRepository, IMapper mapper)
         {
             _folderRepository = folderRepository;
@@ -17,8 +23,8 @@ namespace MiniDrive.App.Services
         }
 
         //Function to Create a new folder
-        public Folder CreateFolder(FolderDto folderDto)
-        {
+        public Folder CreateFolder(FolderDto folderDto, int Id)
+        { 
             var folder = new Folder();
             
             return _folderRepository.CreateFolder(_mapper.Map(folderDto, folder));
@@ -63,6 +69,11 @@ namespace MiniDrive.App.Services
             return _folderRepository.GetFoldersByUserId(userId);
         }
 
-
+        //Function to update a folder in the Folders table
+        public Folder UpdateFolder(FolderDto folderDto)
+        {
+            var folder = new Folder();
+            return _folderRepository.UpdateFolder(_mapper.Map(folderDto, folder));
+        }
     }
 }
