@@ -26,6 +26,9 @@ builder.Services.AddAutoMapper(typeof(FileProfile),typeof(FolderProfile),typeof(
 // Scopes of the services
 builder.Services.AddScoped<IUsers, UserRepository>();
 
+//Configure the Cors for let it others applications can use the application
+builder.Services.AddCors(options => options.AddPolicy("AllowAnyOrigin", builder => builder.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader()));
+
 // Builder for JWT with the token
 builder.Services.AddAuthentication(opt =>
 {
@@ -48,6 +51,12 @@ builder.Services.AddAuthentication(opt =>
 
 
 var app = builder.Build();
+
+//Configure the options of Cors
+app.UseCors("AllowAnyOrigin");
+
+//Map all endpoints
+app.MapControllers();
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
