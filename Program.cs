@@ -21,7 +21,7 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddControllers();
 
 //Configure context to conect at the database in azure whit sqlServer
-builder.Services.AddDbContext<MiniDriveContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+builder.Services.AddDbContext<MiniDriveContext>(options => options.UseMySql(builder.Configuration.GetConnectionString("DefaultConnection"), Microsoft.EntityFrameworkCore.MySqlServerVersion.Parse("8.0.20-mysql")));
 
 //Register AutoMapper and their perfiles
 builder.Services.AddAutoMapper(typeof(FileProfile),typeof(FolderProfile),typeof(UserProfile));
