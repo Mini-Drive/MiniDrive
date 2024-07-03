@@ -41,7 +41,7 @@ namespace MiniDrive.Controllers.Folders
         }
 
         [HttpGet]
-        [Route("api/Folders/")]
+        [Route("api/Folders/{userId}")]
         public IActionResult GetFoldersByUserId(int userId)
         {
             return Ok(_services.GetFoldersByUserId(userId));

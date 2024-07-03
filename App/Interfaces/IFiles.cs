@@ -9,8 +9,8 @@ namespace MiniDrive.App.Interfaces
         //function to get a file by id
         Models.File GetFileById(int id);
 
-        //function to get a file by name
-        Models.File GetFileByName(string fileName);
+        //function to get a file by name and extensions
+        Models.File GetFileByName(string fileName, string extension);
 
         //function to get all files by folder id
         List<Models.File> GetFilesByFolderId(int folderId);
@@ -19,7 +19,7 @@ namespace MiniDrive.App.Interfaces
         Models.File CreateFile(Models.File file);
 
         //function to delete a file
-        Models.File DeleteFile(Models.File file, int id);
+        Models.File DeleteFile(Models.File file);
 
         //function to update a file
         Models.File UpdateFile(Models.File file, int id);

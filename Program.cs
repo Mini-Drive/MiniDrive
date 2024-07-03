@@ -6,6 +6,7 @@ using MiniDrive.App.Interfaces;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
+using MiniDrive.App.Services;
 
 
 
@@ -17,6 +18,8 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
+builder.Services.AddControllers();
+
 //Configure context to conect at the database in azure whit sqlServer
 builder.Services.AddDbContext<MiniDriveContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
@@ -25,6 +28,12 @@ builder.Services.AddAutoMapper(typeof(FileProfile),typeof(FolderProfile),typeof(
 
 // Scopes of the services
 builder.Services.AddScoped<IUsers, UserRepository>();
+builder.Services.AddScoped<IFiles, FileRepository>();
+builder.Services.AddScoped<IFolders, FolderRepository>();
+builder.Services.AddTransient<FileRepository>();
+builder.Services.AddTransient<FolderRepository>();
+builder.Services.AddTransient<FilesServices>();
+builder.Services.AddTransient<FolderServices>();
 
 //Configure the Cors for let it others applications can use the application
 builder.Services.AddCors(options => options.AddPolicy("AllowAnyOrigin", builder => builder.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader()));

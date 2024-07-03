@@ -3,59 +3,84 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using MiniDrive.App.Interfaces;
+using MiniDrive.Infrastructure.Contexts;
 
 namespace MiniDrive.App.Implementations
 {
     public class FileRepository : IFiles
     {
+
+        private readonly MiniDriveContext _context;
+
+        public FileRepository(MiniDriveContext context)
+        {
+            _context = context;
+        }
+
+        //Function by create a mew file 
         public Models.File CreateFile(Models.File file)
         {
-            throw new NotImplementedException();
+            _context.Files.Add(file);
+            _context.SaveChanges();
+            return file;   
         }
 
-        public Models.File DeleteFile(Models.File file, int id)
+        //Function by delete a file (Update status of the file)
+        public Models.File DeleteFile(Models.File file)
         {
-            throw new NotImplementedException();
+            _context.Files.Update(file);
+            _context.SaveChanges();
+            return file;
         }
 
+        //Funtion to get all files 
         public List<Models.File> GetAllFiles()
         {
-            throw new NotImplementedException();
+            return _context.Files.ToList();
         }
 
+        //Funtion to get a file by Id
         public Models.File GetFileById(int id)
         {
-            throw new NotImplementedException();
+            return _context.Files.Find(id);
         }
 
-        public Models.File GetFileByName(string fileName)
+        //Funtion to get a file by name and extension
+        public Models.File GetFileByName(string fileName, string extension)
         {
-            throw new NotImplementedException();
+            return _context.Files.FirstOrDefault(f => f.FileName == fileName && f.FileExtension == extension);
         }
 
+        //Funtion to get all files by folder
         public List<Models.File> GetFilesByFolderId(int folderId)
         {
-            throw new NotImplementedException();
+            return _context.Files.Where(f => f.FolderId == folderId).ToList();
         }
 
+        //Funtion to get all files by user
         public List<Models.File> GetFilesByUserId(int userId)
         {
-            throw new NotImplementedException();
+            return _context.Files.Where(f => f.UserId == userId).ToList();
         }
 
+        //Funtion to get all files by user and folder id
         public List<Models.File> GetFilesByUserIdAndFolderId(int userId, int folderId)
         {
-            throw new NotImplementedException();
+            return _context.Files.Where(f => f.UserId == userId && f.FolderId == folderId).ToList();
         }
 
+        //Funtion to get all files by user and parent folder id
         public List<Models.File> GetFilesByUserIdAndParentFolderId(int userId, int parentFolderId)
         {
-            throw new NotImplementedException();
+            return _context.Files.Where(f => f.UserId == userId && f.FolderId == parentFolderId).ToList();
         }
 
+        //Function to update a file
         public Models.File UpdateFile(Models.File file, int id)
         {
-            throw new NotImplementedException();
+            _context.Files.Update(file);
+            _context.SaveChanges();
+            return file;
         }
     }
 }

@@ -32,11 +32,11 @@ namespace MiniDrive.App.Services
 
         //Function to Delete a folder (Update Status)
 
-        public Folder DeleteFolder(FolderDto folderDto, int id)
+        public Folder DeleteFolder(int id)
         {
-            folderDto.Status = "INACTIVE";
             var folder = GetFolderById(id);
-            return _folderRepository.DeleteFolder(_mapper.Map(folderDto, folder));
+            folder.Status = "INACTIVE";
+            return _folderRepository.DeleteFolder(folder);
         }
 
         //Funtion to get all folders

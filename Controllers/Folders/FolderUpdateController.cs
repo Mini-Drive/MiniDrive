@@ -28,7 +28,7 @@ namespace MiniDrive.Controllers.Folders
         [Route("api/Folders/{id}")]
         public IActionResult DeleteFolder([FromBody] FolderDto folderDeleteDto, int id)
         {
-            return Ok(_services.DeleteFolder(folderDeleteDto, id));
+            return Ok(_services.DeleteFolder(id));
         }
     }
 }
