@@ -34,6 +34,8 @@ builder.Services.AddTransient<FileRepository>();
 builder.Services.AddTransient<FolderRepository>();
 builder.Services.AddTransient<FilesServices>();
 builder.Services.AddTransient<FolderServices>();
+builder.Services.AddTransient<UserRepository>();
+builder.Services.AddTransient<UserServices>();
 
 //Configure the Cors for let it others applications can use the application
 builder.Services.AddCors(options => options.AddPolicy("AllowAnyOrigin", builder => builder.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader()));

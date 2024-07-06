@@ -11,8 +11,6 @@ namespace MiniDrive.Models
         public int? UserId { get; set; }
         public User? User { get; set; }
         public byte[]? Content { get; set; }
-        public byte[]? IV { get; set; }
-        public string? EncryptionKey { get; set; }
         public string? Status { get; set; }
     }
 }
