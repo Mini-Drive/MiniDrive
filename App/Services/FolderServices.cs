@@ -75,5 +75,11 @@ namespace MiniDrive.App.Services
             var folder = GetFolderById(id);
             return _folderRepository.UpdateFolder(_mapper.Map(folderDto, folder));
         }
+
+        //Function to get index folder by user id
+        public Folder GetIndexFolderByUserId(int userId)
+        {
+            return _folderRepository.GetIndexFolderByUserId(userId);
+        }
     }
 }

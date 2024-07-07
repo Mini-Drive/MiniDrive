@@ -19,6 +19,9 @@ namespace MiniDrive.App.Interfaces
         //Function to get the list of folders in the Folders table by UserId
         List<Folder> GetFoldersByUserId(int userId);
 
+        //Function to get the index folder (parentFolderID = null) by user
+        Folder GetIndexFolderByUserId(int userId);
+
         //Function to create a folder in the Folders table
         Folder CreateFolder(Folder folder);
 

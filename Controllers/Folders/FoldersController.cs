@@ -27,7 +27,7 @@ namespace MiniDrive.Controllers.Folders
         }
 
         [HttpGet]
-        [Route("api/Folders/Byid/{Id}")]
+        [Route("api/Folders/Byid/{id}")]
         public IActionResult GetFolderById(int id)
         {
             return Ok(_services.GetFolderById(id));
@@ -35,9 +35,9 @@ namespace MiniDrive.Controllers.Folders
 
         [HttpGet]
         [Route("api/Folders/Byparent/{parentId}")]
-        public IActionResult GetFoldersByParentFolderID(int parentFolderID)
+        public IActionResult GetFoldersByParentFolderID(int parentId)
         {
-            return Ok(_services.GetFoldersByParentFolderID(parentFolderID));
+            return Ok(_services.GetFoldersByParentFolderID(parentId));
         }
 
         [HttpGet]
@@ -46,7 +46,14 @@ namespace MiniDrive.Controllers.Folders
         {
             return Ok(_services.GetFoldersByUserId(userId));
         }
-
+        
+        //get index folder
+        [HttpGet]
+        [Route("api/Folders/index/{userId}")]
+        public IActionResult GetIndexFolderByUserId(int userId)
+        {
+            return Ok(_services.GetIndexFolderByUserId(userId));
+        }
 
     }
 }

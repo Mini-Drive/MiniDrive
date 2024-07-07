@@ -69,5 +69,12 @@ namespace MiniDrive.App.Implementations
             _context.SaveChanges();
             return folder;
         }
+
+        //Function to Get the index folder by user
+
+        public Folder GetIndexFolderByUserId(int userId)
+        {
+            return _context.Folders.FirstOrDefault(u => u.UserId == userId && u.ParentFolderID == null);
+        }
     }
 }

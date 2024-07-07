@@ -14,10 +14,10 @@ namespace MiniDrive.App.Services
         }
 
         //Function for create a new file
-        public Models.File CreateFile(FileDto filedto){
+        public async Task<Models.File> CreateFile(FileDto filedto){
             var file = new Models.File();
             _mapper.Map(filedto, file);
-            return _implement.CreateFile(file);
+            return await _implement.CreateFile(file);
         }
 
         //Function for delete a file

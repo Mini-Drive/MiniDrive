@@ -18,10 +18,10 @@ namespace MiniDrive.App.Implementations
         }
 
         //Function by create a mew file 
-        public Models.File CreateFile(Models.File file)
+        public async Task<Models.File> CreateFile(Models.File file)
         {
             _context.Files.Add(file);
-            _context.SaveChanges();
+           await _context.SaveChangesAsync();
             return file;   
         }
 

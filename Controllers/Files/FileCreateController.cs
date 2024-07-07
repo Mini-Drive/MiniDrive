@@ -16,9 +16,9 @@ namespace MiniDrive.Controllers.Files
         //Post Create a new file
         [HttpPost]
         [Route("api/files")]
-        public IActionResult Create([FromBody] FileDto model)
+        public async Task<IActionResult> Create([FromBody] FileDto model)
         {
-            return Ok(_service.CreateFile(model));
+            return Ok(await _service.CreateFile(model));
         }
 
     }

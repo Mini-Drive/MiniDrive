@@ -16,7 +16,7 @@ namespace MiniDrive.App.Interfaces
         List<Models.File> GetFilesByFolderId(int folderId);
 
         //function to create a file
-        Models.File CreateFile(Models.File file);
+        Task<Models.File> CreateFile(Models.File file);
 
         //function to delete a file
         Models.File DeleteFile(Models.File file);
