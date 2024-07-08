@@ -24,7 +24,7 @@ builder.Services.AddControllers();
 builder.Services.AddDbContext<MiniDriveContext>(options => options.UseMySql(builder.Configuration.GetConnectionString("DefaultConnection"), Microsoft.EntityFrameworkCore.MySqlServerVersion.Parse("8.0.20-mysql")));
 
 //Register AutoMapper and their perfiles
-builder.Services.AddAutoMapper(typeof(FileProfile),typeof(FolderProfile),typeof(UserProfile));
+builder.Services.AddAutoMapper(typeof(FileProfile),typeof(FolderProfile),typeof(UserProfile),typeof(LoginProfile));
 
 // Scopes of the services
 builder.Services.AddScoped<IUsers, UserRepository>();

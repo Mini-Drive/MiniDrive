@@ -21,6 +21,10 @@ namespace MiniDrive.App.Interfaces
         //function to get all users
 
         List<User> GetAllUsers();
+
+        User FindByUsername(string username);
+
+
         
     }
 }

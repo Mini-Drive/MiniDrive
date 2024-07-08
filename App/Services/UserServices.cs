@@ -57,5 +57,25 @@ namespace MiniDrive.App.Services
             return _userRepository.UpdateUser(_mapper.Map(userDto, user));
         }
 
+
+        public User AuthenticateUser(string username, string password)
+{
+    // Aquí deberías buscar el usuario en la base de datos por el username
+    var user = _userRepository.FindByUsername(username);
+
+    if (user != null && VerifyPassword(password, user.Password))
+    {
+        return user;
+    }
+
+    return null;
+}
+
+private bool VerifyPassword(string providedPassword, string storedPassword)
+{
+    
+    return providedPassword == storedPassword;
+}
+
     }
 }

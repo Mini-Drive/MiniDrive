@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace MiniDrive.App.Implementations
 {
-    public class UserRepository: IUsers
+    public class UserRepository : IUsers
     {
         private readonly MiniDriveContext _context;
 
@@ -26,7 +26,7 @@ namespace MiniDrive.App.Implementations
         }
 
         //Function to get a user by id
-        
+
         public User GetUserById(int id)
         {
             return _context.Users.Find(id);
@@ -55,5 +55,12 @@ namespace MiniDrive.App.Implementations
             _context.SaveChanges();
             return user;
         }
+
+        public User FindByUsername(string username)
+        {
+            return _context.Users.FirstOrDefault(u => u.UserName == username);
+        }
     }
 }
+
+
