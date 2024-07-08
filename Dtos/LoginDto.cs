@@ -6,3 +6,4 @@ namespace MiniDrive.Dtos
         public string Password { get; set; }
     }
 }
+

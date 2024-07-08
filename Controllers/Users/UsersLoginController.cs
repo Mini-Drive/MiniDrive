@@ -13,7 +13,6 @@ namespace MiniDrive.Controllers.Users
         {
             _userServices = userServices;
         }
-
         [HttpPost]
         [Route("api/Users/Login")]
         public IActionResult Login([FromBody] LoginDto loginDto)
@@ -22,8 +21,8 @@ namespace MiniDrive.Controllers.Users
 
             if (user != null)
             {
-                // Login exitoso
-                return Ok(new { success = true, message = "Login successful" });
+                // Login exitoso, incluye el ID del usuario en la respuesta
+                return Ok(new { success = true, message = "Login successful", id = user.Id });
             }
             else
             {
@@ -33,3 +32,4 @@ namespace MiniDrive.Controllers.Users
         }
     }
 }
+
