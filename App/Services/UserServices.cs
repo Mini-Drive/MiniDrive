@@ -25,6 +25,8 @@ namespace MiniDrive.App.Services
         public User CreateUser(UserDto userDto)
         {
             var user = new User();
+            userDto.Status = "ACTIVE";
+            userDto.CreateAt = DateOnly.FromDateTime(DateTime.Now);
 
             return _userRepository.CreateUser(_mapper.Map(userDto, user));
         }

@@ -14,12 +14,27 @@ namespace MiniDrive.Controllers.Users
             _services = services;
         }
 
-        [HttpPost]
-        [Route("api/Users")]
-        public IActionResult CreateUser([FromBody] UserDto userDto)
+      [HttpPost]
+[Route("api/Users/Register")]
+public IActionResult CreateUser([FromBody] UserDto userDto)
+{
+    try
+    {
+        var user = _services.CreateUser(userDto);
+        if (user != null)
         {
-            return Ok(_services.CreateUser(userDto));
+            return Ok(new { success = true, message = "User registered successfully" });
         }
+        else
+        {
+            return BadRequest(new { success = false, message = "User registration failed" });
+        }
+    }
+    catch (Exception ex)
+    {
+        return StatusCode(500, new { success = false, message = "Internal server error", details = ex.Message });
+    }
+}
 
     }
 }
