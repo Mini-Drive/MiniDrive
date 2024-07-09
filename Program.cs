@@ -70,11 +70,8 @@ app.UseCors("AllowAnyOrigin");
 app.MapControllers();
 
 // Configure the HTTP request pipeline.
-if (app.Environment.IsDevelopment())
-{
     app.UseSwagger();
     app.UseSwaggerUI();
-}
 
 //permissions for disconnection
 app.UseAuthorization();
