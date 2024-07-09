@@ -21,12 +21,11 @@ namespace MiniDrive.App.Services
         }
 
         //Function for delete a file
-        public Models.File DeleteFile(int id){
-            var file = GetFileById(id);
-            file.Status = "INACTIVE";
-            return _implement.DeleteFile(file);
-        }
 
+public async Task<Models.File> DeleteFileByIdAsync(int id)
+{
+    return await _implement.DeleteFileByIdAsync(id);
+}
         //Function to get all files
         public List<Models.File> GetAllFiles(){
             return _implement.GetAllFiles();
@@ -66,3 +65,4 @@ namespace MiniDrive.App.Services
         }
     }
 }
+
