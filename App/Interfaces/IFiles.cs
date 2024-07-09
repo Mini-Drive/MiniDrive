@@ -19,7 +19,7 @@ namespace MiniDrive.App.Interfaces
         Task<Models.File> CreateFile(Models.File file);
 
         //function to delete a file
-        Task<Models.File> DeleteFileByIdAsync(int id);
+        Models.File DeleteFile(Models.File file);
 
         //function to update a file
         Models.File UpdateFile(Models.File file, int id);
