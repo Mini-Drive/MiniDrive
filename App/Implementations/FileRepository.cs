@@ -26,24 +26,12 @@ namespace MiniDrive.App.Implementations
         }
 
         //Function by delete a file (Update status of the file)
-  public async Task<Models.File> DeleteFileByIdAsync(int id)
+        public Models.File DeleteFile(Models.File file)
         {
-            var file = await _context.Files.FindAsync(id);
-            if (file == null)
-            {
-                return null;
-            }
-
-            file.Status = "INACTIVE";
             _context.Files.Update(file);
-            await _context.SaveChangesAsync();
+            _context.SaveChanges();
             return file;
         }
-        
-public List<Models.File> GetInactiveFilesByUserId(int userId)
-{
-    return _context.Files.Where(f => f.UserId == userId && f.Status == "INACTIVE").ToList();
-}
 
         //Funtion to get all files 
         public List<Models.File> GetAllFiles()
