@@ -1,11 +1,9 @@
 using Microsoft.AspNetCore.Mvc;
 using MiniDrive.App.Services;
-using System.Threading.Tasks;
+using MiniDrive.Dtos;
 
 namespace MiniDrive.Controllers.Files
 {
-    [ApiController]
-    [Route("api/files")]
     public class FileDeleteController : ControllerBase
     {
         private readonly FilesServices _service;
@@ -15,17 +13,33 @@ namespace MiniDrive.Controllers.Files
             _service = service;
         }
 
-        
-        [HttpDelete("{id}")]
+        [HttpDelete]
+        [Route("api/files/{id}")]
         public async Task<IActionResult> Delete(int id)
         {
-            var result = await _service.DeleteFileByIdAsync(id); 
+            var result = await _service.DeleteFileByIdAsync(id);
             if (result == null)
             {
                 return NotFound();
             }
 
-            return NoContent(); 
+            return NoContent();
+        }
+
+
+        [HttpGet]
+        [Route("api/files/deleted/{userId}")]
+        public IActionResult GetDeletedFilesByUserId(int userId)
+        {
+            var files = _service.GetInactiveFilesByUserId(userId);
+            if (files == null || !files.Any())
+            {
+                return NotFound();
+            }
+
+            return Ok(files);
         }
     }
 }
+
+

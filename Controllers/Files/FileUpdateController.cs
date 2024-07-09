@@ -24,15 +24,5 @@ namespace MiniDrive.Controllers.Files
         {
             return Ok(_service.UpdateFile(model, id));
         }
-
-        //Delete a file
-        [HttpDelete]
-        [Route("api/files/{id}")]
-        public IActionResult DeleteFile(int id)
-        {
-            var file = _service.DeleteFile(id);
-            return Ok(file);
-        }
-
     }
 }
