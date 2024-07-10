@@ -60,6 +60,7 @@ namespace MiniDrive.App.Services
         //Function to update a file
         public Models.File UpdateFile(FileDto filedto, int id){
             var file = GetFileById(id);
+            filedto.Content = file.Content;
             _mapper.Map(filedto, file);
             return _implement.UpdateFile(file, id);
         }
