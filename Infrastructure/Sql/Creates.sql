@@ -1,0 +1,43 @@
+-- Active: 1719279770820@@minidrive.database.windows.net@1433@Mini Diver
+
+
+CREATE TABLE Users(
+    Id INT PRIMARY KEY AUTO_INCREMENT,
+    FirstName VARCHAR(255) NOT NULL,
+    LastName VARCHAR(255) NOT NULL,
+    Age VARCHAR(3) NOT NULL,
+    UserName VARCHAR(255) NOT NULL,
+    Password VARCHAR(255) NOT NULL,
+    Email VARCHAR(255) NOT NULL,
+    CreateAt DATE NOT NULL DEFAULT CURRENT_DATE(),
+    Status ENUM('ACTIVE', 'INACTIVE') NOT NULL DEFAULT 'ACTIVE',
+    UNIQUE KEY UCEmail (Email),
+    UNIQUE KEY UCUserName (UserName)
+);
+
+CREATE TABLE Folders(
+    Id INT PRIMARY KEY AUTO_INCREMENT,
+    FolderName VARCHAR(255) NOT NULL,
+    ParentFolderID INT NULL,
+    CreateAt DATE NOT NULL,
+    UserId INT NULL,
+    Status ENUM('ACTIVE', 'INACTIVE', 'TRASH') NOT NULL DEFAULT 'ACTIVE',
+    FOREIGN KEY (UserId) REFERENCES Users(Id)
+);
+
+ALTER TABLE Folders
+ADD CONSTRAINT FK_FolderParentID FOREIGN KEY (ParentFolderID) REFERENCES Folders(Id);
+
+CREATE TABLE Files(
+    Id INT PRIMARY KEY AUTO_INCREMENT,
+    FileName VARCHAR(255) NOT NULL,
+    FileExtension VARCHAR(255) NOT NULL,
+    FolderId INT NULL,
+    CreateAt DATE NOT NULL,
+    UserId INT NULL,
+    Content LONGBLOB NOT NULL,
+    Status ENUM('ACTIVE', 'INACTIVE') NOT NULL DEFAULT 'ACTIVE',
+    FOREIGN KEY (UserId) REFERENCES Users(Id),
+    FOREIGN KEY (FolderId) REFERENCES Folders(Id),
+    UNIQUE KEY UC_FileName (FileName, FileExtension)
+);
